@@ -5,7 +5,13 @@ import { auth } from '../../firebase/firebase.utils';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
+import CartIcon from '../cart-icon/cart-icon-component'
+
 import './header.styles.scss';
+
+import {connect} from 'react-redux';
+
+
 
 const Header = ({ currentUser }) => (
   <div className='header'>
@@ -28,8 +34,13 @@ const Header = ({ currentUser }) => (
           SIGN IN
         </Link>
       )}
+      <CartIcon></CartIcon>
     </div>
   </div>
 );
 
-export default Header;
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+  });
+
+export default connect(mapStateToProps)(Header);
