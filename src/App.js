@@ -8,6 +8,9 @@ import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Header from './components/header/header.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import CheckoutPage from './pages/checkout/checkout.component';
+
+import { setCurrentUser } from './redux/user/user.actions';
 
 import {connect} from 'react-redux';
 
@@ -58,6 +61,7 @@ class App extends React.Component {
                  render = {
                    () => this.props.currentUser ? (<Redirect to="/"/>) : <SignInAndSignUpPage/>}
           />
+          <Route exact path='/checkout' component={CheckoutPage} />
         </Switch>
       </div>
     );
@@ -72,10 +76,7 @@ const mapStateToProps = ({user}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setCurrentUser: (payload) => dispatch({
-        type: 'SET_CURRENT_USER',
-        payload: payload
-    })
+    setCurrentUser: (payload) => dispatch(setCurrentUser(payload))
   }
 }
 
